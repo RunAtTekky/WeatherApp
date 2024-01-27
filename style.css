@@ -23,6 +23,9 @@ h1 {
 }
 
 #find {
+  width: 100px;
+  padding: 7px;
+
   background-color: aqua;
   border-radius: 10px;
 }
