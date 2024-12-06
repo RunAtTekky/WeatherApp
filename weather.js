@@ -15,13 +15,25 @@ function getWeather() {
 
 function displayWeather(data) {
   const display = document.querySelector('h1');
-  const temp = (data.list[0].main.temp - 273.15).toFixed(1);
+  // Celcius = Kelvin - 273.15;
+  const temp = (data.list[0].main.temp - 273.15).toFixed(1); 
+
+  // Fahrenheit = C * 9/5 + 32
+  const temp_fahrenheit = (temp * 9/5 + 32).toFixed(1);
 
   const tempColor = temp/50;
 
-  display.innerHTML = `${temp} C` ;
+  display.innerHTML = `${temp} C ${temp_fahrenheit} F` ;
   document.querySelector('.color').style.backgroundColor = `rgb(230,30,30,${tempColor})`;
   console.log(`Data correctly received.`);
 }
 
 document.querySelector('#find').onclick = getWeather;
+
+// If enter is pressed in text area it must click get weather button
+document.querySelector('#city').addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    document.querySelector('#find').click();
+  }
+});
+
