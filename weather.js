@@ -13,6 +13,7 @@ function getWeather() {
     })
 }
 
+let isCelsius = true;
 function displayWeather(data) {
   const display = document.querySelector('h1');
   // Celcius = Kelvin - 273.15;
@@ -20,10 +21,10 @@ function displayWeather(data) {
 
   // Fahrenheit = C * 9/5 + 32
   const temp_fahrenheit = (temp * 9/5 + 32).toFixed(1);
-
+  
   const tempColor = temp/50;
 
-  display.innerHTML = `${temp} C ${temp_fahrenheit} F` ;
+  display.innerHTML = isCelsius ? `${temp}°C` : `${temp_fahrenheit}°F`;
   document.querySelector('.color').style.backgroundColor = `rgb(230,30,30,${tempColor})`;
   console.log(`Data correctly received.`);
 }
@@ -36,4 +37,10 @@ document.querySelector('#city').addEventListener("keyup", function(event) {
     document.querySelector('#find').click();
   }
 });
+
+document.querySelector('#toggle').onclick = function() {
+  isCelsius = !isCelsius;
+  document.querySelector('#toggle').innerText = isCelsius ? "Show in °F" : "Show in °C";
+  document.querySelector('#find').click(); 
+};
 
